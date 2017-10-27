@@ -4,6 +4,8 @@
 
 [SpringBoot](http://tengj.top/2017/02/26/springboot1/)
 
+[SpringBoot测试打包发布](http://www.cnblogs.com/ityouknow/p/6834287.html?utm_source=itdadao&utm_medium=referral)
+
 ###初始化应用
 ```
 1.打开 Eclipse，接下来我们就开始创建自己的 Web 项目，点击"File"->"New"->"Maven project".
