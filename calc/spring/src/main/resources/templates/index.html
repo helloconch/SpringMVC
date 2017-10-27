@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>calculate</title>
+    <link th:href="@{bootstrap/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{bootstrap/css/bootstrap-theme.css}" rel="stylesheet"/>
+    <script th:src="@{jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{bootstrap/js/bootstrap.js}"></script>
+    <style type="text/css">
+        body {
+            padding: 10px;
+        }
+
+        input {
+            padding: 10px;
+        }
+
+        button {
+            padding: 10px;
+        }
+
+        td {
+            text-align: center;
+            font-size: medium;
+        }
+
+        .tdHeader1 {
+            background-color: #c4e3f3;
+            color: #080808;
+        }
+
+        .tdHeader2 {
+            background-color: #f9f2f4;
+            color: #080808;
+        }
+
+        .tdY {
+            color: #4cae4c;
+        }
+
+        .tdR {
+            color: #d43f3a;
+        }
+
+        .content {
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+    <script th:inline="javascript">
+        var basePath = [[${#httpServletRequest.getScheme() + "://" + #httpServletRequest.getServerName() + ":" + #httpServletRequest.getServerPort() + #httpServletRequest.getContextPath()}]];
+        $(document).ready(function () {
+
+        })
+
+        function calcPrice() {
+            var price = $("#stockPriceId").val()
+            if (isNaN(price)) {
+                return;
+            }
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: basePath + '/calc',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    price: price
+                }),
+                async: true,
+                success: function (data) {
+                    $("#tdy1").html(data.priceY10);
+                    $("#tdy2").html(data.priceY9);
+                    $("#tdy3").html(data.priceY8);
+                    $("#tdy4").html(data.priceY7);
+                    $("#tdy5").html(data.priceY6);
+                    $("#tdy6").html(data.priceY5);
+                    $("#tdy7").html(data.priceY4);
+                    $("#tdy8").html(data.priceY3);
+                    $("#tdy9").html(data.priceY2);
+                    $("#tdy10").html(data.priceY1);
+                    $("#tdR1").html(data.priceR1);
+                    $("#tdR2").html(data.priceR2);
+                    $("#tdR3").html(data.priceR3);
+                    $("#tdR4").html(data.priceR4);
+                    $("#tdR5").html(data.priceR5);
+                    $("#tdR6").html(data.priceR6);
+                    $("#tdR7").html(data.priceR7);
+                    $("#tdR8").html(data.priceR8);
+                    $("#tdR9").html(data.priceR9);
+                    $("#tdR10").html(data.priceR10);
+                },
+                error: function (e) {
+                    alert(e.responseText);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <input type="text" id="stockPriceId" text="0"/>
+        <button class="btn btn-primary" type="button" onclick="calcPrice()">Go</button>
+    </div>
+    <div class="row">
+        <table border="1" class="content">
+            <tr class="tdHeader1">
+                <td>-10%</td>
+                <td>-9%</td>
+                <td>-8%</td>
+                <td>-7%</td>
+                <td>-6%</td>
+                <td>-5%</td>
+                <td>-4%</td>
+                <td>-3%</td>
+                <td>-2%</td>
+                <td>-1%</td>
+            </tr>
+            <tr class="tdY">
+                <td id="tdy1">0</td>
+                <td id="tdy2">0</td>
+                <td id="tdy3">0</td>
+                <td id="tdy4">0</td>
+                <td id="tdy5">0</td>
+                <td id="tdy6">0</td>
+                <td id="tdy7">0</td>
+                <td id="tdy8">0</td>
+                <td id="tdy9">0</td>
+                <td id="tdy10">0</td>
+            </tr>
+            <tr class="tdHeader2">
+                <td>1%</td>
+                <td>2%</td>
+                <td>3%</td>
+                <td>4%</td>
+                <td>5%</td>
+                <td>6%</td>
+                <td>7%</td>
+                <td>8%</td>
+                <td>9%</td>
+                <td>10%</td>
+            </tr>
+            <tr class="tdR">
+                <td id="tdR1">0</td>
+                <td id="tdR2">0</td>
+                <td id="tdR3">0</td>
+                <td id="tdR4">0</td>
+                <td id="tdR5">0</td>
+                <td id="tdR6">0</td>
+                <td id="tdR7">0</td>
+                <td id="tdR8">0</td>
+                <td id="tdR9">0</td>
+                <td id="tdR10">0</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+<span id="name"></span>
+
+</body>
+</html>
